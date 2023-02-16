@@ -1,7 +1,3 @@
-// Create a .txt file containing 10000 rows containing 20 random numbers between 0 and 1000. Each number is separated by a comma. No comma after the last element in a row.
-// File name: DataSet10000.txt
-// File path: src\DataSet10000.txt
-
 import java.io.*;
 import java.util.*;
 
