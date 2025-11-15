@@ -83,7 +83,6 @@ mpicc -O3 -std=c++11 *.cpp -lboost_serialization -o Parallel/main.o
 
 To run on multiple nodes you need an MPI hostfile, e.g.:
 
-# hostfile
 ```
 10.128.0.4 slots=2
 10.128.0.5 slots=2
