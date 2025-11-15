@@ -38,7 +38,8 @@ DATASETPATH must point to the dataset file you want to use (see the Dataset sect
 
 
 ```
-g++ -O3 -std=c++11 *.cpp -o Serial/K-means_sequential.o
+cd Serial
+g++ -O3 -std=c++11 *.cpp -o K-means_sequential
 ```
 
 (adjust the list of .cpp files if needed)
@@ -46,7 +47,8 @@ g++ -O3 -std=c++11 *.cpp -o Serial/K-means_sequential.o
 **Run**
 
 ```
-./Serial/K-means_sequential.o
+cd Serial
+./K-means_sequential
 ```
 
 The program:
