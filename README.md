@@ -21,18 +21,6 @@ variance (MSE/TWCV).
 
 ### Serial program
 
-**Configuration**
-
-In the serial source (e.g. K-means_sequential.cpp) set:
-
-```
-string DATASETPATH = "path/to/dataset/DataSet10000x10.txt";
-
-int MAXITERATION = 5; // or any value you prefer
-```
-
-DATASETPATH must point to the dataset file you want to use (see the Dataset section below).
-
 
 **Compile**
 
@@ -61,23 +49,12 @@ The program:
 
 ### Parallel program (MPI)
 
-**Configuration**
-
-In the parallel source (main.cpp) set the same parameters:
-
-```
-string DATASETPATH = "path/to/dataset/DataSet10000x10.txt";
-int MAXITERATION = 5; // or any value you prefer
-```
-
-Again, DATASETPATH must match the actual path of the dataset on your system.
-
 **Compile**
 
 
 ```
 cd Parallel
-mpicc -O3 -std=c++11 *.cpp -lboost_serialization -o main.o
+mpicc -O3 -std=c++11 *.cpp -lboost_serialization -o main
 ```
 
 (adapt the command depending on your MPI / Boost installation)
@@ -97,7 +74,7 @@ Example with 8 processes:
 
 ```
 cd Parallel
-mpirun --hostfile hostfile -np 8 ./main.o
+mpirun --hostfile hostfile -np 8 ./main
 ```
 
 Make sure that -np does not exceed the total number of slots declared in the hostfile.
