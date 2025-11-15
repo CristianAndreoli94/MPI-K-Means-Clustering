@@ -4,6 +4,51 @@ into K clusters by iteratively assigning each point to the closest centroid and 
 centroids as the mean of their assigned points. The goal is to minimize the total within-cluster
 variance (MSE/TWCV).
 
+
+---
+
+## Project structure
+
+- `DataSet/` – dataset files  
+- `Serial/` – serial C++ implementation  
+- `Parallel/` – parallel C++ implementation using MPI  
+- `Utility/` – toy dataset generators (Java)  
+- `Report K-means Clustering.pdf` – theoretical and experimental report  
+
+---
+
+## Requirements
+
+To compile and run the programs you need:
+
+- A C++ compiler (e.g. `g++`) with C++11 or later
+- [OpenMPI](https://www.open-mpi.org/) or an equivalent MPI implementation
+- [Boost](https://www.boost.org/) (`serialization` and `iostreams` libraries) for the parallel program
+- Java JDK 8+ for the dataset generator
+
+---
+
+## Dataset
+
+The project works on a text-based dataset where each line represents a point,
+and the columns (comma-separated) represent the features.
+
+You can use the `Utility/DataSetGenerator.java` program to generate a toy
+dataset.
+
+### Dataset generation
+
+Inside `DataSetGenerator.java` (or an equivalent file) you will find:
+
+```java
+int M = 1500;  // number of rows (points)
+int N = 10;    // number of columns (point dimension)
+FileWriter fileWriter = new FileWriter("src/DataSet" + M + "x" + N + ".txt");
+
+You can change M and N to generate datasets of different sizes and then run the generator to produce a file named, for example, DataSet1500x10.txt.
+
+---
+
 ### Parallelization overview
 
 The dataset X ∈ ℝ^{m×n} is loaded by the master and partitioned into P blocks, one per MPI
@@ -42,3 +87,4 @@ Detailed plots are in the PDF.
 - Load very large datasets in chunks to avoid running out of RAM.
 - Better balance the “tail” so the master does not process nearly twice the work of a worker.
 - Avoid repeatedly sending invariant metadata (e.g., buffer size) in MPI messages.
+
