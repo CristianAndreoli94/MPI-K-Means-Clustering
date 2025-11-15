@@ -11,21 +11,19 @@
 
 #include "Cluster.h"
 #include "Point.h"
+#include "config.hpp"
 
 using namespace std;
 
-int K = 0; // Number of Clusters
-int MAXITERATION = 100;
-string DATASETPATH = "/mnt/c/Users/Cristian/IdeaProjects/DatasetGenerator/src/DataSet10000x10.txt";
 const int lentag=0;
 const int stat=1;
 const int datapointtag=2;
 const int dataclustertag=3;
 const int datasumclustertag=4;
 
-void readDataSet(int *pointDimension,int *totalNumberPoint){
+void readDataSet(const std::string& dataset_path,int *pointDimension,int *totalNumberPoint){
     string buffer;
-    ifstream DataSet; DataSet.open(DATASETPATH);
+    ifstream DataSet; DataSet.open(dataset_path);
     if(!DataSet.is_open()){
         cout << "FILE OPENING FAILED" << endl;
         MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
@@ -48,6 +46,7 @@ void readDataSet(int *pointDimension,int *totalNumberPoint){
 }
 
 int main(int argc, char* argv[]) {
+    Config cfg = parse_args(argc, argv);
     MPI_Init(&argc, &argv);
     MPI_Status status;
     srand(time(0)); // Randomize initialization point
@@ -64,9 +63,10 @@ int main(int argc, char* argv[]) {
         // INIZIALIZETION
         //-------------------------------------------------------------------
         // READING FILE
-        readDataSet(&pointDimension,&totalNumberPoint);
+        readDataSet(cfg.dataset_path, &pointDimension,&totalNumberPoint);
         // INIZIALIZE CLUSTERS AND CENTROIDS
-        K = sqrt(totalNumberPoint/2);
+        int K = sqrt(totalNumberPoint/2);
+        int MAXITERATION = cfg.max_iter;
         Cluster::createKclusters(K,pointDimension);
         //-------------------------------------------------------------------
         int pointsXprocessor = totalNumberPoint / commSize;
@@ -96,10 +96,10 @@ int main(int argc, char* argv[]) {
             Cluster::clustersReset();
             // ASSIGN POINTS TO CLUSTERS WITH NEAREST CENTROID
             endtime   = MPI_Wtime(); // Stop timer
-            printf("APRE ASS %f seconds\n",endtime-starttime); // Print execution time
+            //printf("PRE ASS %f seconds\n",endtime-starttime); // Print execution time
             Cluster::pointAssignment((commSize-1)*pointsXprocessor,totalNumberPoint);
             endtime   = MPI_Wtime(); // Stop timer
-            printf("AFTER ASS %f seconds\n",endtime-starttime); // Print execution time
+            //printf("AFTER ASS %f seconds\n",endtime-starttime); // Print execution time
             // CALCULATE MASTER SUM_CLUSTER
             for(int i=0;i<Cluster::getNumberCluster();i++){
                 Cluster::sumPointsClusters();
