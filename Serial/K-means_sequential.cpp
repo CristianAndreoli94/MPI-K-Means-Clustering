@@ -11,10 +11,11 @@ using namespace std;
 
 int K = 0; // Number of Clusters
 int MAXITERATION = 5;
+string DATASETPATH = "/mnt/c/Users/Cristian/IdeaProjects/DatasetGenerator/src/DataSet10000x10.txt";
 
 void readDataSet(int *pointDimension,int *totalNumberPoint){
     string buffer;
-    ifstream DataSet; DataSet.open("/mnt/c/Users/Cristian/IdeaProjects/DatasetGenerator/src/DataSet10000x10.txt");
+    ifstream DataSet; DataSet.open(DATASETPATH);
     if(!DataSet.is_open()){
         cout << "FILE OPENING FAILED" << endl;
         return;
@@ -70,4 +71,5 @@ int main(){
     cout << "Time taken by program is : " << time_taken << " sec " << endl;
 
     return 0;
+
 }
