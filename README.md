@@ -57,7 +57,7 @@ cd Serial
 
 The program:
 
-- reads the dataset from DATASETPATH,
+- reads the dataset from given path,
 - runs K-Means for at most MAXITERATION iterations (or until convergence),
 - prints basic timing information to stdout.
 
@@ -111,6 +111,13 @@ Example with 8 processes:
 cd Parallel
 mpirun --hostfile hostfile -np 8 ./main --dataset Dataset.txt --max-iter 5
 ```
+
+The program:
+
+- reads the dataset from given path,
+- runs K-Means for at most MAXITERATION iterations (or until convergence),
+- prints basic timing information to stdout.
+
 
 Make sure that -np does not exceed the total number of slots declared in the hostfile.
 
