@@ -145,7 +145,7 @@ dataset.
 
 ### Dataset generation
 
-Inside `DataSetGenerator.java` (or an equivalent file) you will find:
+Inside `DataSetGenerator.java` you will find:
 
 java
 ```
