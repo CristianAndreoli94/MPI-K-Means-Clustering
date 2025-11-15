@@ -34,9 +34,23 @@ g++ -O3 -std=c++11 *.cpp -o K-means_sequential
 
 **Run**
 
+Usage: kmeans_serial [OPTIONS]
+
+  Run the K-Means clustering algorithm on a local dataset in serial mode.
+
+Options:
+  -d, --dataset PATH        Path to the dataset file to process (CSV-like
+                            format, one point per line).  [required]
+
+  -m, --max-iter INTEGER    Maximum number of iterations allowed.
+                            [default: 5; 1<=x<=10000]
+
+
+Example of usage:
+
 ```
 cd Serial
-./K-means_sequential
+./K-means_sequential --dataset Dataset.txt --max-iter 5
 ```
 
 The program:
@@ -70,11 +84,30 @@ To run on multiple nodes you need an MPI hostfile, e.g.:
 
 **Run**
 
+```
+Usage: mpirun [MPI OPTIONS] ./kmeans_mpi [OPTIONS]
+
+  Run the parallel MPI-based K-Means clustering algorithm.
+
+MPI options:
+  -np INTEGER               Number of MPI processes to launch.  [required]
+  --hostfile PATH           Optional hostfile for multi-node execution.
+  --mca ...                 Additional MPI runtime parameters.
+
+Program options:
+  -d, --dataset PATH        Path to dataset file to process (CSV-like format,
+                            one point per line).  [required]
+
+  -m, --max-iter INTEGER    Maximum number of iterations allowed.
+                            [default: 5; 1<=x<=10000]
+```
+
+
 Example with 8 processes:
 
 ```
 cd Parallel
-mpirun --hostfile hostfile -np 8 ./main
+mpirun --hostfile hostfile -np 8 ./main --dataset Dataset.txt --max-iter 5
 ```
 
 Make sure that -np does not exceed the total number of slots declared in the hostfile.
