@@ -70,7 +70,7 @@ The program:
 
 ```
 cd Parallel
-mpicc -O3 -std=c++11 *.cpp -lboost_serialization -o main
+mpicxx -O3 -std=c++11 *.cpp -lboost_serialization -o main
 ```
 
 (adapt the command depending on your MPI / Boost installation)
