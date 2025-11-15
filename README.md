@@ -147,8 +147,8 @@ dataset.
 
 Inside `DataSetGenerator.java` (or an equivalent file) you will find:
 
-```
 java
+```
 int M = 1500;  // number of rows (points)
 int N = 10;    // number of columns (point dimension)
 FileWriter fileWriter = new FileWriter("src/DataSet" + M + "x" + N + ".txt");
