@@ -1,12 +1,12 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class DataSetGenerator {
     public static void main(String[] args) {
         int M = 1500;
         int N = 10;
         try {
-            FileWriter fileWriter = new FileWriter("src\\DataSet"+M+"x"+N+".txt");
+            FileWriter fileWriter = new FileWriter("DataSet"+M+"x"+N+".txt");
             for (int i = 0; i < M; i++) {
                 for (int j = 0; j < N; j++) {
                     fileWriter.write(String.valueOf(new Random().nextInt(10)));
