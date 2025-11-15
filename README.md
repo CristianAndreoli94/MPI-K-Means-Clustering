@@ -29,9 +29,10 @@ In the serial source (e.g. K-means_sequential.cpp) set:
 string DATASETPATH = "path/to/dataset/DataSet10000x10.txt";
 
 int MAXITERATION = 5; // or any value you prefer
+```
 
 DATASETPATH must point to the dataset file you want to use (see the Dataset section below).
-```
+
 
 **Compile**
 
