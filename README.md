@@ -25,24 +25,28 @@ variance (MSE/TWCV).
 
 In the serial source (e.g. K-means_sequential.cpp) set:
 
-std::string DATASETPATH = "/mnt/c/Users/Cristian/IdeaProjects/DatasetGenerator/src/DataSet10000x10.txt";
+```
+string DATASETPATH = "path/to/dataset/DataSet10000x10.txt";
 
 int MAXITERATION = 5; // or any value you prefer
 
 DATASETPATH must point to the dataset file you want to use (see the Dataset section below).
+```
 
 **Compile**
 
-From the Serial/ folder:
 
-cd Serial
-g++ -O3 -std=c++11 *.cpp -o kmeans_serial
+```
+g++ -O3 -std=c++11 *.cpp -o Serial/K-means_sequential.o
+```
 
 (adjust the list of .cpp files if needed)
 
 **Run**
 
-./kmeans_serial
+```
+./Serial/K-means_sequential.o
+```
 
 The program:
 
@@ -56,19 +60,21 @@ The program:
 
 **Configuration**
 
-In the parallel source (e.g. main.cpp) set the same parameters:
+In the parallel source (main.cpp) set the same parameters:
 
-std::string DATASETPATH = "/mnt/c/Users/Cristian/IdeaProjects/DatasetGenerator/src/DataSet10000x10.txt";
+```
+string DATASETPATH = "path/to/dataset/DataSet10000x10.txt";
 int MAXITERATION = 5; // or any value you prefer
+```
 
 Again, DATASETPATH must match the actual path of the dataset on your system.
 
 **Compile**
 
-From the Parallel/ folder:
 
-cd Parallel
-mpic++ -O3 -std=c++11 *.cpp -lboost_serialization -o kmeans_mpi
+```
+mpicc -O3 -std=c++11 *.cpp -lboost_serialization -o Parallel/main.o
+```
 
 (adapt the command depending on your MPI / Boost installation)
 
@@ -77,18 +83,16 @@ mpic++ -O3 -std=c++11 *.cpp -lboost_serialization -o kmeans_mpi
 To run on multiple nodes you need an MPI hostfile, e.g.:
 
 # hostfile
+```
 10.128.0.4 slots=2
 10.128.0.5 slots=2
-
-For a single machine you can use:
-
-localhost slots=4
+```
 
 **Run**
 
 Example with 8 processes:
 
-mpirun --hostfile hostfile -np 8 ./kmeans_mpi
+mpirun --hostfile hostfile -np 8 ./Parallel/main.o
 
 Make sure that -np does not exceed the total number of slots declared in the hostfile.
 
