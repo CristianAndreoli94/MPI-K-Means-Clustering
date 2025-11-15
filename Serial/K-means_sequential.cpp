@@ -6,16 +6,17 @@
 #include "Tupla.h"
 #include "Cluster.h"
 #include "Point.h"
+#include "config.hpp"
 
 using namespace std;
 
 int K = 0; // Number of Clusters
 int MAXITERATION = 5;
-string DATASETPATH = "/mnt/c/Users/Cristian/IdeaProjects/DatasetGenerator/src/DataSet10000x10.txt";
+string DATASETPATH = "DataSet10000x10.txt";
 
-void readDataSet(int *pointDimension,int *totalNumberPoint){
+void readDataSet(const string& dataset_path, int *pointDimension,int *totalNumberPoint){
     string buffer;
-    ifstream DataSet; DataSet.open(DATASETPATH);
+    ifstream DataSet; DataSet.open(dataset_path);
     if(!DataSet.is_open()){
         cout << "FILE OPENING FAILED" << endl;
         return;
@@ -37,7 +38,8 @@ void readDataSet(int *pointDimension,int *totalNumberPoint){
     DataSet.close();
 }
 
-int main(){
+int main(int argc, char** argv){
+    Config cfg = parse_args(argc, argv);
     time_t start, end;
     time(&start);
     int pointDimension;    // Dimensione del dato R^pointDimension
@@ -46,10 +48,11 @@ int main(){
     srand(time(0)); // Randomize initialization point
 
     // READING FILE
-    readDataSet(&pointDimension,&totalNumberPoint);
+    readDataSet(cfg.dataset_path,&pointDimension,&totalNumberPoint);
 
     // INIZIALIZE CLUSTERS AND CENTROIDS
     K = sqrt(totalNumberPoint/2);
+    int max_iter = cfg.max_iter;
     Cluster::createKclusters(K,pointDimension);
     // INITIAL TMSE
     double previousTMSE = 0;
