@@ -58,7 +58,7 @@ cd Serial
 The program:
 
 - reads the dataset from given path,
-- runs K-Means for at most MAXITERATION iterations (or until convergence),
+- runs K-Means for at most max-iter iterations (or until convergence),
 - prints basic timing information to stdout.
 
 ---
@@ -115,7 +115,7 @@ mpirun --hostfile hostfile -np 8 ./main --dataset Dataset.txt --max-iter 5
 The program:
 
 - reads the dataset from given path,
-- runs K-Means for at most MAXITERATION iterations (or until convergence),
+- runs K-Means for at most max-iter iterations (or until convergence),
 - prints basic timing information to stdout.
 
 
