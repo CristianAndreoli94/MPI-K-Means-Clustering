@@ -34,6 +34,7 @@ g++ -O3 -std=c++11 *.cpp -o K-means_sequential
 
 **Run**
 
+```
 Usage: kmeans_serial [OPTIONS]
 
   Run the K-Means clustering algorithm on a local dataset in serial mode.
@@ -44,6 +45,7 @@ Options:
 
   -m, --max-iter INTEGER    Maximum number of iterations allowed.
                             [default: 5; 1<=x<=10000]
+```
 
 
 Example of usage:
