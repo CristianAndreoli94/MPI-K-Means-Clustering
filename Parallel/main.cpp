@@ -16,6 +16,7 @@ using namespace std;
 
 int K = 0; // Number of Clusters
 int MAXITERATION = 100;
+string DATASETPATH = "/mnt/c/Users/Cristian/IdeaProjects/DatasetGenerator/src/DataSet10000x10.txt";
 const int lentag=0;
 const int stat=1;
 const int datapointtag=2;
@@ -24,7 +25,7 @@ const int datasumclustertag=4;
 
 void readDataSet(int *pointDimension,int *totalNumberPoint){
     string buffer;
-    ifstream DataSet; DataSet.open("DataSet10000x10.txt");
+    ifstream DataSet; DataSet.open(DATASETPATH);
     if(!DataSet.is_open()){
         cout << "FILE OPENING FAILED" << endl;
         MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
