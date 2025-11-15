@@ -92,7 +92,9 @@ To run on multiple nodes you need an MPI hostfile, e.g.:
 
 Example with 8 processes:
 
+```
 mpirun --hostfile hostfile -np 8 ./Parallel/main.o
+```
 
 Make sure that -np does not exceed the total number of slots declared in the hostfile.
 
