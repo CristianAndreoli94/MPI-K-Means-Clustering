@@ -87,7 +87,7 @@ To run on multiple nodes you need an MPI hostfile, e.g.:
 **Run**
 
 ```
-Usage: mpirun [MPI OPTIONS] ./kmeans_mpi [OPTIONS]
+Usage: mpirun [MPI OPTIONS] ./main [OPTIONS]
 
   Run the parallel MPI-based K-Means clustering algorithm.
 
