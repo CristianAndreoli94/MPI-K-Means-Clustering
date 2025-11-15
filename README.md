@@ -76,7 +76,8 @@ Again, DATASETPATH must match the actual path of the dataset on your system.
 
 
 ```
-mpicc -O3 -std=c++11 *.cpp -lboost_serialization -o Parallel/main.o
+cd Parallel
+mpicc -O3 -std=c++11 *.cpp -lboost_serialization -o main.o
 ```
 
 (adapt the command depending on your MPI / Boost installation)
@@ -95,7 +96,8 @@ To run on multiple nodes you need an MPI hostfile, e.g.:
 Example with 8 processes:
 
 ```
-mpirun --hostfile hostfile -np 8 ./Parallel/main.o
+cd Parallel
+mpirun --hostfile hostfile -np 8 ./main.o
 ```
 
 Make sure that -np does not exceed the total number of slots declared in the hostfile.
